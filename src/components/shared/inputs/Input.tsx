@@ -20,10 +20,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         <input
             ref={ref}
             type={type}
+            name={name}
             value={value}
             spellCheck={false}
             placeholder={placeholder}
             onChange={handleValueChange}
+            autoComplete="off"
             className={`w-full border font-nunito font-semibold placeholder:font-medium text-[15px] text-black ${
                 error ? "border-error" : "border-border"
             }  focus:outline-none focus:border-black p-[10px] rounded-[12px] bg-[#FAFAFA]`}

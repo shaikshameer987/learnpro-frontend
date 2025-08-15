@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { SignInForm } from "@/types/auth";
+import { AuthMode, SignInForm } from "@/types/auth";
 import Input from "@/components/shared/inputs/Input";
 import PrimaryButton from "../shared/buttons/PrimaryButton";
 
-const SignIn = () => {
+type SignInProps = {
+    mode: AuthMode;
+};
+
+const SignIn = (props: SignInProps) => {
+    const { mode } = props;
+
     const [formDetails, setFormDetails] = useState<SignInForm>({
         email: "",
         password: "",
@@ -22,7 +28,9 @@ const SignIn = () => {
     return (
         <form
             onSubmit={handleSignIn}
-            className="w-full h-full flex flex-col items-center justify-center p-[40px]"
+            className={`w-full h-full transition-all duration-700 ease-in-out ${
+                mode === "login" ? "translate-x-[0%]" : "translate-x-[-100%]"
+            } flex flex-col items-center justify-center p-[40px]`}
         >
             <h1 className="font-roboto font-bold text-[40px] text-[#212121] mb-[20px]">Sign In</h1>
             <div className="w-full flex flex-col gap-[20px]">

@@ -23,11 +23,11 @@ const Authentication = () => {
     return (
         <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
             <div className="w-[800px] h-[450px] flex relative bg-white rounded-[50px] overflow-hidden shadow-[5px_5px_10px_1px_rgba(0,0,0,0.1)]">
-                <div className="w-[50%] overflow-hidden flex h-full rounded-[50px]">
-                    <SignUp />
+                <div className="w-[50%] overflow-hidden flex h-full rounded-[50px] relative">
+                    <SignUp mode={mode} />
                 </div>
                 <div className="w-[50%] overflow-hidden flex h-full rounded-[50px]">
-                    <SignIn />
+                    <SignIn mode={mode} />
                 </div>
                 <AuthSwitcher mode={mode} setMode={setMode} />
             </div>
