@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AuthMode, SignUpForm } from "@/types/auth";
 import Input from "@/components/shared/inputs/Input";
+import Password from "../shared/inputs/Password";
 import PrimaryButton from "../shared/buttons/PrimaryButton";
 
 type SignUpProps = {
@@ -30,7 +31,7 @@ const SignUp = (props: SignUpProps) => {
         <form
             onSubmit={handleSignUp}
             className={`w-full h-full transition-all duration-700 ease-in-out ${
-                mode === "login" ? "translate-x-[100%]" : "translate-x-[0%]"
+                mode === "login" ? "translate-x-[100%]" : "translate-x-[0%] z-[100]"
             } flex flex-col items-center justify-center p-[40px]`}
         >
             <h1 className="font-roboto font-bold text-[40px] text-[#212121] mb-[20px]">Sign Up</h1>
@@ -49,13 +50,14 @@ const SignUp = (props: SignUpProps) => {
                     value={formDetails.email}
                     onChange={handleValueChange}
                 />
-                <Input
-                    type="text"
-                    name="password"
-                    placeholder="Password"
-                    value={formDetails.password}
-                    onChange={handleValueChange}
-                />
+                <div className="relative">
+                    <Password
+                        name="password"
+                        placeholder="Password"
+                        value={formDetails.password}
+                        onChange={handleValueChange}
+                    />
+                </div>
                 <PrimaryButton type="submit" text="Sign Up" />
             </div>
         </form>

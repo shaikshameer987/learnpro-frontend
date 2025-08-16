@@ -24,7 +24,7 @@ const AuthSwitcher = (props: Props) => {
     return (
         <div className="w-[100%] h-full absolute flex top-[0vw] left-[0%]">
             <div
-                className={`absolute w-[50%] h-[450px] transition-all z-[1] duration-700 ease-in-out ${
+                className={`absolute w-[50%] h-[450px] transition-all z-[202] duration-700 ease-in-out ${
                     mode === "signup" ? "translate-x-[-100%]" : "translate-x-[0%]"
                 } flex flex-col items-center justify-center p-[50px]`}
             >
@@ -39,13 +39,13 @@ const AuthSwitcher = (props: Props) => {
                 </div>
             </div>
             <div
-                className={`transition-all duration-700 ease-in-out ${
+                className={`transition-all duration-700 ease-in-out z-[101] ${
                     mode === "signup" ? "translate-x-[100%]" : "translate-x-[0%]"
                 } w-[50%] h-full bg-black rounded-[50px]`}
             />
             <div
                 className={`w-[50%] h-full transition-all duration-700 ease-in-out ${
-                    mode === "signup" ? "translate-x-[0%]" : "translate-x-[100%]"
+                    mode === "signup" ? "translate-x-[0%] z-[202]" : "translate-x-[100%]"
                 } flex flex-col items-center justify-center p-[50px]`}
             >
                 <h1 className="font-roboto font-bold text-[40px] text-white mb-[40px]">

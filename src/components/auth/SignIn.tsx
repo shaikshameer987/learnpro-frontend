@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AuthMode, SignInForm } from "@/types/auth";
 import Input from "@/components/shared/inputs/Input";
 import PrimaryButton from "../shared/buttons/PrimaryButton";
+import Password from "../shared/inputs/Password";
 
 type SignInProps = {
     mode: AuthMode;
@@ -29,7 +30,7 @@ const SignIn = (props: SignInProps) => {
         <form
             onSubmit={handleSignIn}
             className={`w-full h-full transition-all duration-700 ease-in-out ${
-                mode === "login" ? "translate-x-[0%]" : "translate-x-[-100%]"
+                mode === "login" ? "translate-x-[0%] z-[100]" : "translate-x-[-100%]"
             } flex flex-col items-center justify-center p-[40px]`}
         >
             <h1 className="font-roboto font-bold text-[40px] text-[#212121] mb-[20px]">Sign In</h1>
@@ -41,8 +42,7 @@ const SignIn = (props: SignInProps) => {
                     value={formDetails.email}
                     onChange={handleValueChange}
                 />
-                <Input
-                    type="text"
+                <Password
                     name="password"
                     placeholder="Password"
                     value={formDetails.password}
