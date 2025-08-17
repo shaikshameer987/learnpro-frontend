@@ -5,6 +5,11 @@ import { AuthMode, SignUpForm } from "@/types/auth";
 import Input from "@/components/shared/inputs/Input";
 import Password from "../shared/inputs/Password";
 import PrimaryButton from "../shared/buttons/PrimaryButton";
+import { apiCall } from "@/utilities/axios";
+import { apiUrls } from "@/urls";
+import { authenticationSuccess } from "@/store/slices/authSlice";
+import { useDispatch } from "react-redux";
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 type SignUpProps = {
     mode: AuthMode;
@@ -12,19 +17,25 @@ type SignUpProps = {
 
 const SignUp = (props: SignUpProps) => {
     const { mode } = props;
-
     const [formDetails, setFormDetails] = useState<SignUpForm>({
         name: "",
         email: "",
         password: "",
     });
+    const dispatch = useDispatch();
 
     const handleValueChange = (name: string, value: any) => {
         setFormDetails({ ...formDetails, [name]: value });
     };
 
-    const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const url = apiBaseUrl + apiUrls.registerUser;
+        const successHandler = (data: any) => {
+            dispatch(authenticationSuccess({ user: data }));
+        };
+        const failureHandler = (data: any) => {};
+        apiCall(url, "POST", formDetails, successHandler, failureHandler);
     };
 
     return (
