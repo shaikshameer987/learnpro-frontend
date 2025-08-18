@@ -5,6 +5,12 @@ import { AuthMode, SignInForm } from "@/types/auth";
 import Input from "@/components/shared/inputs/Input";
 import PrimaryButton from "../shared/buttons/PrimaryButton";
 import Password from "../shared/inputs/Password";
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
+import { apiUrls } from "@/urls";
+import { useDispatch } from "react-redux";
+import { authenticationSuccess } from "@/store/slices/authSlice";
+import { apiCall } from "@/utilities/axios";
+import { useRouter } from "next/navigation";
 
 type SignInProps = {
     mode: AuthMode;
@@ -12,6 +18,8 @@ type SignInProps = {
 
 const SignIn = (props: SignInProps) => {
     const { mode } = props;
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     const [formDetails, setFormDetails] = useState<SignInForm>({
         email: "",
@@ -22,8 +30,17 @@ const SignIn = (props: SignInProps) => {
         setFormDetails({ ...formDetails, [name]: value });
     };
 
-    const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const url = apiBaseUrl + apiUrls.login;
+        const successHandler = (data: any) => {
+            dispatch(authenticationSuccess({ user: data }));
+            router.push("/");
+        };
+        const failureHandler = (data: any) => {
+            console.log(data);
+        };
+        apiCall(url, "POST", successHandler, failureHandler, formDetails);
     };
 
     return (

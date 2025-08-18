@@ -9,6 +9,7 @@ import { apiCall } from "@/utilities/axios";
 import { apiUrls } from "@/urls";
 import { authenticationSuccess } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 type SignUpProps = {
@@ -23,6 +24,7 @@ const SignUp = (props: SignUpProps) => {
         password: "",
     });
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const handleValueChange = (name: string, value: any) => {
         setFormDetails({ ...formDetails, [name]: value });
@@ -33,6 +35,7 @@ const SignUp = (props: SignUpProps) => {
         const url = apiBaseUrl + apiUrls.registerUser;
         const successHandler = (data: any) => {
             dispatch(authenticationSuccess({ user: data }));
+            router.push("/");
         };
         const failureHandler = (data: any) => {};
         apiCall(url, "POST", successHandler, failureHandler, formDetails);
