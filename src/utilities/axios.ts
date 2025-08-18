@@ -5,9 +5,9 @@ type ApiMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 export const apiCall = async (
     url: string,
     method: ApiMethod,
-    data: any,
     successHandler: (data: any) => void,
     failureHandler: (data: any) => void,
+    data?: any,
     headers?: Record<string, string>
 ) => {
     try {

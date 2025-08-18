@@ -35,7 +35,7 @@ const SignUp = (props: SignUpProps) => {
             dispatch(authenticationSuccess({ user: data }));
         };
         const failureHandler = (data: any) => {};
-        apiCall(url, "POST", formDetails, successHandler, failureHandler);
+        apiCall(url, "POST", successHandler, failureHandler, formDetails);
     };
 
     return (
